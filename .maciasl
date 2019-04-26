@@ -1,5 +1,4 @@
 [audio]  Audio Layout 22	DSDT/Patch/audio_HDEF-layout22.txt
 [ethernet]  Add Null Ethernet	DSDT/Patch/Eth_NullEthernet.txt
 [syn] System deep idle	DSDT/Patch/system_deep_idle.txt
-[3] OS Check Fix  DSDT/Patch/system_OSYS.txt
-[3]  OS Check Fix	DSDT/Patch/system_OSYS.txt
+[C]  OS Check Fix	DSDT/Patch/system_OSYS.txt
