@@ -1,3 +1,4 @@
+[syn] Rename _DSM methods to XDSM	DSDT/Patch/rename_DSM.txt
 [audio]  Audio Layout 22	DSDT/Patch/audio_HDEF-layout22.txt
 [ethernet]  Add Null Ethernet	DSDT/Patch/Eth_NullEthernet.txt
 [system] System deep idle	DSDT/Patch/system_deep_idle.txt
