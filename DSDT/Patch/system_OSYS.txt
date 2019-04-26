@@ -34,3 +34,23 @@ into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2015\"\)\) replace_ma
 into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2017\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Windows 2017"))) end;
 
 into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Linux\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Linux"))) end;
+
+
+# Cause the DSDT to simulate "Windows 2012" when running under "Darwin" (OS X).
+#
+# This can fix various DSDT related problems for code within the DSDT
+# that is conditional on the operating system version.
+
+# ReplaceALL to patch second reference
+
+# Add name for "Darwin"(OS X)
+into_all all code_regex Name\s\(LINX,\s\"Linux\"\) replace_matched
+begin
+    Name (LINX, "Linux")\n
+    Name (OSX, "Darwin")\n
+end;
+
+into_all method code_regex If\s+\([\\]?_OSI\s+\(WN81\)\) replace_matched
+begin
+If (LOr (_OSI (OSX), _OSI (WN81)))
+end;
