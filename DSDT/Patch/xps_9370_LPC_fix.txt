@@ -1,0 +1,29 @@
+# LPC fix
+into method label _DSM parent_adr 0x001F0000 remove_entry;
+into device name_adr 0x001F0000 insert
+begin
+Method (_DSM, 4, NotSerialized)\n
+{\n
+    If (LNot (Arg2))\n
+            {\n
+                Return (Buffer (One)\n
+                {\n
+                     0x03\n                                           
+                })\n
+            }\n
+    Return (Package(0x04)\n
+            {\n
+                "device-id",\n 
+                Buffer (0x04)\n
+                {\n
+                     0xC1, 0x9C, 0x00, 0x00\n                         
+                },\n 
+                "compatible",\n 
+                Buffer (0x0D)\n
+                {\n
+                    "pci8086,9cc1"\n
+                }\n
+            })\n
+
+}\n
+end;
