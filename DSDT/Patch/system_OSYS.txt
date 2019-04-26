@@ -6,6 +6,15 @@
 # This can fix various DSDT related problems for code within the DSDT
 # that is conditional on the operating system version.
 
+
+into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2001\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Windows 2001"))) end;
+
+into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2001\sSP1\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Windows 2001 SP1"))) end;
+
+into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2001\sSP2\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Windows 2001 SP2"))) end;
+
+into_all method code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2001\.1\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Windows 2001.1"))) end;
+
 # sometimes in Scope (_SB.PCI0)
 into method label _INI parent_label _SB.PCI0 code_regex If\s+\([\\]?_OSI\s+\(\"Windows\s2006\"\)\) replace_matched begin If(LOr(_OSI("Darwin"),_OSI("Windows 2006"))) end;
 
