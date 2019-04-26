@@ -1,0 +1,173 @@
+# Battery patch
+into device label BAT0  code_regex  Name\s+\(\_UID\,\s+\One?\)  replace_matched begin 
+Name (_UID, Zero)\n
+end;
+into device label BAT1  code_regex  Name\s+\(\_UID\,\s+0x02?\)  replace_matched begin 
+Name (_UID, Zero)\n
+end;
+into device label BAT0  code_regex  Name\s+\(_HID,\s+\EisaId\s+\("PNP0C0A"\)\) remove_matched;
+into device label BAT1  code_regex  Name\s+\(_HID,\s+\EisaId\s+\("PNP0C0A"\)\) remove_matched;
+into scope label _SB insert 
+begin
+Device (BATC)\n
+        {\n
+            Name (_HID, EisaId ("PNP0C0A"))\n
+            Name (_UID, 0x02)\n
+            Method (CVWA, 3, NotSerialized)\n
+            {\n
+                If (Arg2)\n
+                {\n
+                    Divide (Multiply (Arg0, 0x03E8), Arg1, , Arg0)\n
+                }\n
+               Return (Arg0)\n
+            }\n
+            Method (_STA, 0, NotSerialized)\n
+            {\n
+                Return (Or (^^BAT0._STA (), ^^BAT1._STA ()))\n
+            }\n
+            Name (B0CO, Zero)\n
+            Name (B1CO, Zero)\n
+            Name (B0DV, Zero)\n
+            Name (B1DV, Zero)\n
+            Method (_BST, 0, NotSerialized)\n
+            {\n
+                Store (^^BAT0._BST (), Local0)\n
+                Store (^^BAT0._STA (), Local2)\n
+                If (LEqual (0x1F, Local2))\n
+                {\n
+                    Store (DerefOf (Index (Local0, 0x02)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local2)\n
+                    }\n
+                }\n
+                Store (^^BAT1._BST (), Local1)\n
+                Store (^^BAT1._STA (), Local3)\n
+                If (LEqual (0x1F, Local3))\n
+                {\n
+                    Store (DerefOf (Index (Local1, 0x02)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local3)\n
+                    }\n
+                }\n
+                If (LAnd (LNotEqual (0x1F, Local2), LEqual (0x1F, Local3)))\n
+                {\n
+                    Store (Local1, Local0)\n
+                    Store (Local3, Local2)\n
+                    Store (Zero, Local3)\n
+                }\n
+                If (LAnd (LEqual (0x1F, Local2), LEqual (0x1F, Local3)))\n
+                {\n
+                    Store (DerefOf (Index (Local0, Zero)), Local4)\n
+                    Store (DerefOf (Index (Local1, Zero)), Local5)\n
+                    If (LOr (LEqual (Local4, 0x02), LEqual (Local5, 0x02)))\n
+                    {\n
+                        Store (0x02, Index (Local0, Zero))\n
+                    }\n
+                    ElseIf (LOr (LEqual (Local4, One), LEqual (Local5, One)))\n
+                    {\n
+                        Store (One, Index (Local0, Zero))\n
+                    }\n
+                    ElseIf (LOr (LEqual (Local4, 0x05), LEqual (Local5, 0x05)))\n
+                    {\n
+                        Store (0x05, Index (Local0, Zero))\n
+                    }\n
+                    ElseIf (LOr (LEqual (Local4, 0x04), LEqual (Local5, 0x04)))\n
+                    {\n
+                        Store (0x04, Index (Local0, Zero))\n
+                    }\n
+                    Add (CVWA (DerefOf (Index (Local0, One)), B0DV, B0CO), CVWA (DerefOf (Index (Local1, One)), B1DV, B1CO), Index (Local0, One))\n
+                    Add (CVWA (DerefOf (Index (Local0, 0x02)), B0DV, B0CO), CVWA (DerefOf (Index (Local1, 0x02)), B1DV, B1CO), Index (Local0, 0x02))\n
+                    Divide (Add (DerefOf (Index (Local0, 0x03)), DerefOf (Index (Local1, 0x03))), 0x02, , Index (Local0, 0x03))\n
+                }\n
+                Return (Local0)\n
+            }\n
+            Method (_BIF, 0, NotSerialized)\n
+            {\n
+                Store (^^BAT0._BIF (), Local0)\n
+                Store (^^BAT0._STA (), Local2)\n
+                If (LEqual (0x1F, Local2))\n
+                {\n
+                    Store (DerefOf (Index (Local0, One)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local2)\n
+                    }\n
+                    Store (DerefOf (Index (Local0, 0x02)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local2)\n
+                    }\n
+                    Store (DerefOf (Index (Local0, 0x04)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local2)\n
+                    }\n
+                }\n
+                Store (^^BAT1._BIF (), Local1)\n
+                Store (^^BAT1._STA (), Local3)\n
+                If (LEqual (0x1F, Local3))\n
+                {\n
+                    Store (DerefOf (Index (Local1, One)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local3)\n
+                    }\n
+                    Store (DerefOf (Index (Local1, 0x02)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local3)\n
+                    }\n
+                    Store (DerefOf (Index (Local1, 0x04)), Local4)\n
+                    If (LOr (LNot (Local4), LEqual (Ones, Local4)))\n
+                    {\n
+                        Store (Zero, Local3)\n
+                    }\n
+                }\n
+                If (LAnd (LNotEqual (0x1F, Local2), LEqual (0x1F, Local3)))\n
+                {\n
+                    Store (Local1, Local0)\n
+                    Store (Local3, Local2)\n
+                    Store (Zero, Local3)\n
+                }\n
+                If (LAnd (LEqual (0x1F, Local2), LEqual (0x1F, Local3)))\n
+                {\n
+                    Store (LNot (DerefOf (Index (Local0, Zero))), B0CO)\n
+                    Store (LNot (DerefOf (Index (Local1, Zero))), B1CO)\n
+                    Store (One, Index (Local0, Zero))\n
+                    Store (DerefOf (Index (Local0, 0x04)), B0DV)\n
+                    Store (DerefOf (Index (Local1, 0x04)), B1DV)\n
+                    Add (CVWA (DerefOf (Index (Local0, One)), B0DV, B0CO), CVWA (DerefOf (Index (Local1, One)), B1DV, B1CO), Index (Local0, One))\n
+                    Add (CVWA (DerefOf (Index (Local0, 0x02)), B0DV, B0CO), CVWA (DerefOf (Index (Local1, 0x02)), B1DV, B1CO), Index (Local0, 0x02))\n
+                    Divide (Add (B0DV, B1DV), 0x02, , Index (Local0, 0x04))\n
+                    Add (CVWA (DerefOf (Index (Local0, 0x05)), B0DV, B0CO), CVWA (DerefOf (Index (Local1, 0x05)), B1DV, B1CO), Index (Local0, 0x05))\n
+                    Add (CVWA (DerefOf (Index (Local0, 0x06)), B0DV, B0CO), CVWA (DerefOf (Index (Local1, 0x06)), B1DV, B1CO), Index (Local0, 0x06))\n
+                }\n
+                Return (Local0)\n
+            }\n
+        }\n
+end;
+
+#AC adaptor
+into_all all label AC set_label begin ADP1 end;
+into_all all code_regex \(AC, replaceall_matched begin (ADP1, end;
+into device name_hid ACPI0003 insert
+begin
+        Name (_PRW, Package (0x02)\n
+        {\n
+            0x18,\n 
+            0x03\n
+        })\n
+end;
+into method label _PCL parent_label ADP1 remove_entry;
+into device label ADP1 insert begin
+Method (_PCL, 0, NotSerialized)\n
+                {\n
+                    Return (Package (0x02)\n
+                    {\n
+                        _SB,\n 
+                        BATC\n 
+                    })\n
+                }\n
+end;
