@@ -1,0 +1,37 @@
+# Add DMAC device
+into device name_adr 0x001F0000 insert 
+begin
+Device (DMAC)\n
+        {\n
+            Name (_HID, EisaId ("PNP0200"))\n
+            Name (_CRS, ResourceTemplate ()\n
+            {\n
+                IO (Decode16,\n
+                    0x0000,\n
+                    0x0000,\n
+                    0x01,\n
+                    0x20,\n
+                    )\n
+                IO (Decode16,\n
+                    0x0081,\n
+                    0x0081,\n
+                    0x01,\n
+                    0x11,\n
+                    )
+                IO (Decode16,\n
+                    0x0093,\n
+                    0x0093,\n
+                    0x01,\n
+                    0x0D,\n
+                    )\n
+                IO (Decode16,\n
+                    0x00C0,\n
+                    0x00C0,\n
+                    0x01,\n
+                    0x20,\n
+                    )\n
+                DMA (Compatibility, NotBusMaster, Transfer8_16, )\n
+                    {4}\n
+            })\n
+        }\n
+end;
