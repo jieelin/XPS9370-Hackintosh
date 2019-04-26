@@ -55,7 +55,8 @@ Device (PNLF)\n
     }\n
 }\n
 end;
-# BRT6 - brightness method
+
+# BRT6 - brightness key method
 into method label BRT6 remove_entry;       
 into device label IGPU insert begin
 Method (BRT6, 2, NotSerialized)\n
@@ -76,3 +77,7 @@ Method (BRT6, 2, NotSerialized)\n
             }\n
         }\n
 end;
+
+#ALSD->ALS0 ALS Device
+into device label ALSD set_label begin ALS0 end;
+into_all all code_regex ALSD replaceall_matched begin ALS0 end;
