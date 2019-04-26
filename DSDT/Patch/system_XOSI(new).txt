@@ -1,0 +1,26 @@
+#system_OSYS
+into device label PAGD  remove_entry;
+into_all all code_regex _OSI replaceall_matched begin XOSI end;
+into_all all code_regex OSID replaceall_matched begin OSSD end;
+into method label OSID set_label begin OSSD end;
+into scope label \ insert begin
+Method (XOSI, 1, NotSerialized)\n
+    {\n
+        Store (Package (0x08)\n
+            {\n
+                "Windows",\n
+                "Windows 2001",\n 
+                "Windows 2001 SP2",\n
+                "Windows 2006",\n
+                "Windows 2006 SP1",\n
+                "Windows 2006.1",\n
+                "Windows 2009",\n
+                "Windows 2012",\n
+                "Windows 2013",\n
+                "Windows 2015",\n
+                "Windows 2016",\n
+                "Windows 2017"\n
+            }, Local0)\n
+        Return (LNotEqual (Ones, Match (Local0, MEQ, Arg0, MTR, Zero, Zero)))\n
+    }\n
+end;
