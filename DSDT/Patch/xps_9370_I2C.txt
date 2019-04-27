@@ -8,6 +8,8 @@ Return (0x0F)
 
 end;
 
+#I2C TPD1 GPI pin
+
 into method label _CRS parent_label TPD1 replace_content begin
 
 Return (ConcatenateResTemplate (SBFB, SBFG))
