@@ -1,0 +1,30 @@
+into_all all label SAT0 set_label begin SATA end;
+into_all all code_regex SAT0 replaceall_matched begin SATA end;
+into_all all label _SB.PCI0.SAT0 set_label begin _SB.PCI0.SATA end;
+into_all all label _SB.PCI0.SAT0.PRT1 set_label begin _SB.PCI0.SATA.PRT1 end;
+into_all all label _SB.PCI0.SAT0.VOL0 set_label begin _SB.PCI0.SATA.VOL0 end;
+into device label SATA insert begin
+        Method (_DSM, 4, NotSerialized)\n
+        {\n
+            If (LNot (Arg2))\n
+            {\n
+                Return (Buffer (One)\n
+                {\n
+                     0x03\n                                           
+                })\n
+            }\n
+                Return (Package(0x04)\n
+            {\n
+                "device-id",\n 
+                Buffer (0x04)\n
+                {\n
+                     0x02, 0xA1, 0x00, 0x00\n                         
+                },\n 
+                "compatible",\n 
+                Buffer (0x0D)\n
+                {\n
+                    "pci8086,a102"\n
+                }\n
+            })\n
+        }\n
+end;
