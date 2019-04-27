@@ -2,4 +2,4 @@
 
 into device label HECI set_label begin IMEI end;
 into_all all code_regex HECI replaceall_matched begin IMEI end;
-into_all all label _SB.PCI0.LPCB.HECI set_label begin _SB.PCI0.LPCB.IMEI end;
+into_all all label _SB.PCI0.HECI set_label begin _SB.PCI0.IMEI end;
