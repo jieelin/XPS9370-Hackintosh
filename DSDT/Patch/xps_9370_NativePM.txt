@@ -1,0 +1,19 @@
+# Add _DSM to CPU0
+into scope label _PR.CPU0 insert begin
+Method (_DSM, 4, NotSerialized)\n
+        {\n
+            Store ("Writing plugin-type to Registry!", Debug)\n
+            If (LEqual (Arg2, Zero))\n
+            {\n
+                Return (Buffer (One)\n
+                {\n
+                     0x03\n                                           
+                })\n
+            }\n
+            Return (Package (0x02)\n
+            {\n
+                "plugin-type",\n 
+                One\n
+            })\n
+        }\n
+end;
