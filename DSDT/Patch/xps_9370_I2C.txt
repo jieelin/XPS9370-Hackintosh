@@ -15,3 +15,39 @@ into method label _CRS parent_label TPD1 replace_content begin
 Return (ConcatenateResTemplate (SBFB, SBFG))
 
 end;
+
+into device label PS2K insert
+begin
+    \n
+    Name (RMCF, Package (0x08)\n
+    {\n
+        "Mouse", \n
+        Package (0x02)\n
+        {\n
+            "DisableDevice", \n
+            ">y"\n
+        }, \n
+        \n
+        "Synaptics TouchPad", \n
+        Package (0x02)\n
+        {\n
+            "DisableDevice", \n
+            ">y"\n
+        }, \n
+        \n
+        "ALPS GlidePoint", \n
+        Package (0x02)\n
+        {\n
+            "DisableDevice", \n
+            ">y"\n
+        }, \n
+        \n
+        "Sentelic FSP", \n
+        Package (0x02)\n
+        {\n
+            "DisableDevice", \n
+            ">y"\n
+        }\n
+    })\n
+\n
+end;
