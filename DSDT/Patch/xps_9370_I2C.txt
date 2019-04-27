@@ -7,3 +7,9 @@ into method label _STA parent_label GPI0 replace_content begin
 Return (0x0F)
 
 end;
+
+into method label _CRS parent_label TPD1 replace_content begin
+
+Return (ConcatenateResTemplate (SBFB, SBFG))
+
+end;
