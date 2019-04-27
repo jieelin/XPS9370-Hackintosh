@@ -18,7 +18,6 @@ end;
 
 into device label PS2K insert
 begin
-    \n
     Name (RMCF, Package (0x08)\n
     {\n
         "Mouse", \n
