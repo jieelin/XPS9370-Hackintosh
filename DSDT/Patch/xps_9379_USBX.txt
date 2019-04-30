@@ -1,8 +1,6 @@
 #Created by syscl
-#syscl_USBX_n_PNLF
 #Convert to _DSM method for USBX credit syscl
 
-into_all device label PNLF remove_entry;
 into definitionblock code_regex . insert
 begin
 Scope (_SB)\n
