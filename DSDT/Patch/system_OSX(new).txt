@@ -6,7 +6,7 @@ into method label OSID set_label begin OSSD end;
 into scope label \ insert begin
 Method (XOSI, 1, NotSerialized)\n
     {\n
-        Store (Package (0x0D)\n
+        Store (Package (0x0C)\n
             {\n
                 "Windows",\n
                 "Windows 2001",\n 
