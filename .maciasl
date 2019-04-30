@@ -9,7 +9,6 @@
 [sys] IRQ Fix	DSDT/Patch/system_IRQ.txt
 [sys] RTC Fix	DSDT/Patch/system_RTC.txt
 [sys] Fix Mutex with non-zero SyncLevel	DSDT/Patch/system_Mutex.txt
-[sys] Add IMEI	DSDT/Patch/system_IMEI.txt
 [igpu] Rename GFX0 to IGPU	DSDT/Patch/graphics_Rename-GFX0.txt
 [sys] Fix _WAK IAOE	DSDT/Patch/system_IAOE.txt
 [igpu] Rename B0D3 to HDAU	DSDT/Patch/graphics_Rename-B0D3.txt
