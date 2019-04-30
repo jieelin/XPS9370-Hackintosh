@@ -20,7 +20,7 @@
 [audio] Rename HDS to HDEF	DSDT/Patch/audio_HDAS_to_HDEF.txt
 [system] OS check fix (new)	DSDT/Patch/system_OSX(new).txt
 [No.01] xps 9370 BrightLight patch	DSDT/Patch/xps_9370_PNLF_BRT6_ALS.txt
-[No.02] xps 9370 BrightLight patch	DSDT/Patch/xps_9370_Battery_AC.txt
+[No.02] xps 9370 Battery patch	DSDT/Patch/xps_9370_Battery_AC.txt
 [No.03] xps 9370 fix DMAC	DSDT/Patch/xps_9370_DMAC.txt
 [No.04] xps 9370 fix EC	DSDT/Patch/xps_9370_ECDV_to_EC.txt
 [No.05] xps 9370 fix EPC	DSDT/Patch/xps_9370_EPC.txt
