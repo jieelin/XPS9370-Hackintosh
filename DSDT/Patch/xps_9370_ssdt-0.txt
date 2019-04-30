@@ -1,0 +1,3 @@
+# SATA
+into_all all label \_SB.PCI0.SAT0 set_label begin \_SB.PCI0.SATA end;
+into_all all code_regex SAT0 replaceall_matched begin SATA end;
