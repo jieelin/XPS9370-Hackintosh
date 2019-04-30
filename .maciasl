@@ -18,3 +18,4 @@
 [usb] USB3 _PRW 0x6D (instant wake)	DSDT/Patch/usb_prw_0x6d_xhc.txt
 [gfx0] Cleanup/Fix Errors (SSDT)	DSDT/Patch/graphics_SSDT-disable-cleanup.txt
 [syn] Remove _PSS placeholders	DSDT/Patch/fix_PSS.txt
+[1] xps 9370 BrightLight patch	DSDT/Patch/xps_9370_PNLF_BRT6_ALS.txt
