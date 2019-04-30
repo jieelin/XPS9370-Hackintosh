@@ -1,0 +1,48 @@
+#Maintained by: RehabMan for: Laptop Patches
+#graphics_SSDT-disable-cleanup.txt
+
+# These patches can be used to clean common errors in SSDTs
+# commonly used by laptops with switched dual-GPU setups.
+
+into device label WMI1 remove_entry;
+into_all all code_regex .*WMI1.* removeall_matched;
+
+into_all method label MXMX remove_entry;
+into_all method label _DSM remove_entry;
+into_all method label HDSM remove_entry;
+into_all method label HGAS remove_entry;
+into_all method label HNOT remove_entry;
+into_all method label HDOS remove_entry;
+
+into all code_regex Name\s+\(_IRC,\s+([^\)].*)\) replace_matched
+begin
+Method(_IRC, 0, NotSerialized) { Return(%1) }
+end;
+
+# if using refs.txt (recommended), this patch not needed
+into method label _BCM code_regex (\s*)(Arg0)$ replace_matched begin %1//%2 end;
+
+#graphics_Rename-GFX0.txt
+
+# Note: Most DSDT/SSDTs use GFX0 for the integrated graphics device,
+#  but there are few renegades that use VID or AGP1.
+#  If your DSDT uses VID or AGP1 instead of GFX0, see the 
+#  alternate patch "Rename VID/AGP1 to IGPU"
+
+# sometimes there is already IGPU used for other things
+into_all all code_regex IGPU, replaceall_matched begin IGFX, end;
+
+# rename GFX0 -> IGPU for better power management
+into_all all code_regex GFX0\. replaceall_matched begin IGPU. end;
+into_all all code_regex \.GFX0 replaceall_matched begin .IGPU end;
+into_all all code_regex \sGFX0, replaceall_matched begin IGPU, end;
+into_all all code_regex \(GFX0 replaceall_matched begin (IGPU end;
+into_all all label GFX0 set_label begin IGPU end;
+into_all all label _SB.PCI0.GFX0 set_label begin _SB.PCI0.IGPU end;
+into_all all label \_SB.PCI0.GFX0 set_label begin \_SB.PCI0.IGPU end;
+into_all all label _SB.PCI0.GFX0.DD02 set_label begin _SB.PCI0.IGPU.DD02 end;
+into_all all label \_SB.PCI0.GFX0.DD02 set_label begin \_SB.PCI0.IGPU.DD02 end;
+into_all all label ^^^GFX0 set_label begin ^^^IGPU end;
+into_all all label ^^GFX0 set_label begin ^^IGPU end;
+into_all all label ^GFX0 set_label begin ^IGPU end;
+
