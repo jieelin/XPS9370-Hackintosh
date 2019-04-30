@@ -1,57 +1,270 @@
 # Add PNLF
 into_all device label PNLF remove_entry;
+
+into definitionblock code_regex . insert
+begin
+    External (RMCF.BKLT, IntObj)    // (from opcode)\n
+    External (RMCF.FBTP, IntObj)    // (from opcode)\n
+    External (RMCF.GRAN, IntObj)    // (from opcode)\n
+    External (RMCF.LEVW, IntObj)    // (from opcode)\n
+    External (RMCF.LMAX, IntObj)    // (from opcode)\n
+end;
+
 into device name_adr 0x00020000 insert
 begin
+\n
+OperationRegion (RMP3, PCI_Config, Zero, 0x14)\n
+\n
 Device (PNLF)\n
 {\n
-    // normal PNLF declares (note some of this probably not necessary)\n
-    Name (_ADR, Zero)\n
-    Name (_HID, EisaId ("APP0002"))\n
-    Name (_CID, "backlight")\n
-    Name (_UID, 10)\n
-    Name (_STA, 0x0B)\n
-    // _BCM/_BQC: set/get for brightness level\n
-    Method (_BCM, 1, NotSerialized)\n
-    {\n
-        // Update backlight via existing DSDT methods\n
-        ^^LCD._BCM(Arg0)\n
-    }\n
-    Method (_BQC, 0, NotSerialized)\n
-    {\n
-        Return(^^LCD._BQC())\n
-    }\n
-    Method (_BCL, 0, NotSerialized)\n
-    {\n
-        Return(^^LCD._BCL())\n
-    }\n
-    Method (_DOS, 1, NotSerialized)\n
-    {\n
-        ^^_DOS(Arg0)\n
-    }\n
-    // extended _BCM/_BQC for setting "in between" levels\n
-    Method (XBCM, 1, NotSerialized)\n
-    {\n
-        // Update backlight via existing DSDT methods\n
-        ^^LCD._BCM(Arg0)\n
-    }\n
-    Method (XBQC, 0, NotSerialized)\n
-    {\n
-        Return(^^LCD._BQC())\n
-    }\n
-    // Use XOPT=1 to disable smooth transitions\n
-    Name (XOPT, Zero)\n
-    // XRGL/XRGH: defines the valid range\n
-    Method (XRGL, 0, NotSerialized)\n
-    {\n
-        Store(_BCL(), Local0)\n
-        Store(DerefOf(Index(Local0, 2)), Local0)\n
-        Return(Local0)\n
-    }\n
-    Method (XRGH, 0, NotSerialized)\n
-    {\n
-        Store(_BCL(), Local0)\n
-        Store(DerefOf(Index(Local0, Subtract(SizeOf(Local0), 1))), Local0)\n
-        Return(Local0)\n
+        Name (_ADR, Zero)  // _ADR: Address\n
+        Name (_HID, EisaId ("APP0002"))  // _HID: Hardware ID\n
+        Name (_CID, "backlight")  // _CID: Compatible ID\n
+        Name (_UID, Zero)  // _UID: Unique ID\n
+        Name (_STA, 0x0B)  // _STA: Status\n
+        Field (^RMP3, AnyAcc, NoLock, Preserve)\n
+        {\n
+            Offset (0x02), \n
+            GDID,   16, \n
+            Offset (0x10), \n
+            BAR1,   32\n
+        }\n
+\n
+        OperationRegion (RMB1, SystemMemory, And (BAR1, 0xFFFFFFFFFFFFFFF0), 0x000E1184)\n
+        Field (RMB1, AnyAcc, Lock, Preserve)\n
+        {\n
+            Offset (0x48250), \n
+            LEV2,   32, \n
+            LEVL,   32, \n
+            Offset (0x70040), \n
+            P0BL,   32, \n
+            Offset (0xC2000), \n
+            GRAN,   32, \n
+            Offset (0xC8250), \n
+            LEVW,   32, \n
+            LEVX,   32, \n
+            LEVD,   32, \n
+            Offset (0xE1180), \n
+            PCHL,   32\n
+        }\n
+\n
+        Method (INI1, 1, NotSerialized)\n
+        {\n
+            If (LEqual (Zero, And (0x02, Arg0)))\n
+            {\n
+                Store (0xC0000000, Local5)\n
+                If (CondRefOf (\RMCF.LEVW))\n
+                {\n
+                    If (LNotEqual (Ones, \RMCF.LEVW))\n
+                    {\n
+                        Store (\RMCF.LEVW, Local5)\n
+                    }\n
+                }\n
+\n
+                Store (Local5, ^LEVW)\n
+            }\n
+\n
+            If (And (0x04, Arg0))\n
+            {\n
+                If (CondRefOf (\RMCF.GRAN))\n
+                {\n
+                    Store (\RMCF.GRAN, ^GRAN)\n
+                }\n
+                Else\n
+                {\n
+                    Store (Zero, ^GRAN)\n
+                }\n
+            }\n
+        }\n
+\n
+        Method (_INI, 0, NotSerialized)  // _INI: Initialize\n
+        {\n
+            Store (One, Local4)\n
+            If (CondRefOf (\RMCF.BKLT))\n
+            {\n
+                Store (\RMCF.BKLT, Local4)\n
+            }\n
+\n
+            If (LNot (And (One, Local4)))\n
+            {\n
+                Return (Zero)\n
+            }\n
+\n
+            Store (^GDID, Local0)\n
+            Store (Ones, Local2)\n
+            If (CondRefOf (\RMCF.LMAX))\n
+            {\n
+                Store (\RMCF.LMAX, Local2)\n
+            }\n
+\n
+            Store (Zero, Local3)\n
+            If (CondRefOf (\RMCF.FBTP))\n
+            {\n
+                Store (\RMCF.FBTP, Local3)\n
+            }\n
+\n
+            If (LOr (LEqual (One, Local3), LNotEqual (Ones, Match (Package (0x10)\n
+                                {\n
+                                    0x010B, \n
+                                    0x0102, \n
+                                    0x0106, \n
+                                    0x1106, \n
+                                    0x1601, \n
+                                    0x0116, \n
+                                    0x0126, \n
+                                    0x0112, \n
+                                    0x0122, \n
+                                    0x0152, \n
+                                    0x0156, \n
+                                    0x0162, \n
+                                    0x0166, \n
+                                    0x016A, \n
+                                    0x46, \n
+                                    0x42\n
+                                }, MEQ, Local0, MTR, Zero, Zero))))\n
+            {\n
+                If (LEqual (Ones, Local2))\n
+                {\n
+                    Store (0x0710, Local2)\n
+                }\n
+\n
+                ShiftRight (^LEVX, 0x10, Local1)\n
+                If (LNot (Local1))\n
+                {\n
+                    Store (Local2, Local1)\n
+                }\n
+\n
+                If (LAnd (LNot (And (0x08, Local4)), LNotEqual (Local2, Local1)))\n
+                {\n
+                    Divide (Multiply (^LEVL, Local2), Local1, , Local0)\n
+                    ShiftLeft (Local2, 0x10, Local3)\n
+                    If (LGreater (Local2, Local1))\n
+                    {\n
+                        Store (Local3, ^LEVX)\n
+                        Store (Local0, ^LEVL)\n
+                    }\n
+                    Else\n
+                    {\n
+                        Store (Local0, ^LEVL)\n
+                        Store (Local3, ^LEVX)\n
+                    }\n
+                }\n
+            }\n
+            ElseIf (LOr (LEqual (0x03, Local3), LNotEqual (Ones, Match (Package (0x04)\n
+                                {\n
+                                    0x3E9B, \n
+                                    0x3EA5, \n
+                                    0x3E92, \n
+                                    0x3E91\n
+                                }, MEQ, Local0, MTR, Zero, Zero))))\n
+            {\n
+                If (LEqual (Ones, Local2))\n
+                {\n
+                    Store (0xFFFF, Local2)\n
+                }\n
+\n
+                INI1 (Local4)\n
+                Store (^LEVX, Local1)\n
+                If (LNot (Local1))\n
+                {\n
+                    Store (Local2, Local1)\n
+                }\n
+\n
+                If (LAnd (LNot (And (0x08, Local4)), LNotEqual (Local2, Local1)))\n
+                {\n
+                    Divide (Multiply (^LEVD, Local2), Local1, , Local0)\n
+                    If (LGreater (Local2, Local1))\n
+                    {\n
+                        Store (Local2, ^LEVX)\n
+                        Store (Local0, ^LEVD)\n
+                    }\n
+                    Else\n
+                    {\n
+                        Store (Local0, ^LEVD)\n
+                        Store (Local2, ^LEVX)\n
+                    }\n
+                }\n
+            }\n
+            Else\n
+            {\n
+                If (LEqual (Ones, Local2))\n
+                {\n
+                    If (LNotEqual (Ones, Match (Package (0x16)\n
+                                    {\n
+                                        0x0D26, \n
+                                        0x0A26, \n
+                                        0x0D22, \n
+                                        0x0412, \n
+                                        0x0416, \n
+                                        0x0A16, \n
+                                        0x0A1E, \n
+                                        0x0A1E, \n
+                                        0x0A2E, \n
+                                        0x041E, \n
+                                        0x041A, \n
+                                        0x0BD1, \n
+                                        0x0BD2, \n
+                                        0x0BD3, \n
+                                        0x1606, \n
+                                        0x160E, \n
+                                        0x1616, \n
+                                        0x161E, \n
+                                        0x1626, \n
+                                        0x1622, \n
+                                        0x1612, \n
+                                        0x162B\n
+                                    }, MEQ, Local0, MTR, Zero, Zero)))\n
+                    {\n
+                        Store (0x0AD9, Local2)\n
+                    }\n
+                    Else\n
+                    {\n
+                        Store (0x056C, Local2)\n
+                    }\n
+                }\n
+\n
+                INI1 (Local4)\n
+                ShiftRight (^LEVX, 0x10, Local1)\n
+                If (LNot (Local1))\n
+                {\n
+                    Store (Local2, Local1)\n
+                }\n
+\n
+                If (LAnd (LNot (And (0x08, Local4)), LNotEqual (Local2, Local1)))\n
+                {\n
+                    Or (Divide (Multiply (And (^LEVX, 0xFFFF), Local2), Local1, ), ShiftLeft (Local2, 0x10), Local0)\n
+                    Store (Local0, ^LEVX)\n
+                }\n
+            }\n
+\n
+            If (LEqual (Local2, 0x0710))\n
+            {\n
+                Store (0x0E, _UID)\n
+            }\n
+            ElseIf (LEqual (Local2, 0x0AD9))\n
+            {\n
+                Store (0x0F, _UID)\n
+            }\n
+            ElseIf (LEqual (Local2, 0x056C))\n
+            {\n
+                Store (0x10, _UID)\n
+            }\n
+            ElseIf (LEqual (Local2, 0x07A1))\n
+            {\n
+                Store (0x11, _UID)\n
+            }\n
+            ElseIf (LEqual (Local2, 0x1499))\n
+            {\n
+                Store (0x12, _UID)\n
+            }\n
+            ElseIf (LEqual (Local2, 0xFFFF))\n
+            {\n
+                Store (0x13, _UID)\n
+            }\n
+            Else\n
+            {\n
+                Store (0x63, _UID)\n
+            }\n
     }\n
 }\n
 end;
