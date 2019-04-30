@@ -78,6 +78,24 @@ Method (BRT6, 2, NotSerialized)\n
         }\n
 end;
 
+
 #ALSD->ALS0 ALS Device
 into device label ALSD set_label begin ALS0 end;
 into_all all code_regex ALSD replaceall_matched begin ALS0 end;
+into device label ALS0 replace_content
+begin
+    Device(ALS0)\n
+    {\n
+        Name(_HID, "ACPI0008")\n
+        Name(_CID, "smc-als")\n
+        Name(_ALI, 300)\n
+        Name(_ALR, Package()\n
+        {\n
+            //Package() { 70, 0 },\n
+            //Package() { 73, 10 },\n
+            //Package() { 85, 80 },\n
+            Package() { 100, 300 },\n
+            //Package() { 150, 1000 },\n
+        })\n
+    }\n
+end;
