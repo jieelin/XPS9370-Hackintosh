@@ -6,4 +6,9 @@ Method(ESEL)\n
 {\n
    // do nothing\n
 }\n
+\n
+Method(_SB.PCI0.XHC.XSEL)\n
+{\n
+    // do nothing\n
+}\n
 end;
