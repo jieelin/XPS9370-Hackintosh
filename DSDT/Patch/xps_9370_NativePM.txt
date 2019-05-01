@@ -6,8 +6,8 @@
 # Newer KabyLake/KabyLake-R/CoffeeLake boards use _PR.PR00, or _PR.P000 as first CPU path.
 # Adjust this code according to what you find for Processor objects in your own DSDT.
 
-into scope label _PR.CPU0 insert begin
-Method(_PR.CPU0._DSM, 4)\n
+into scope label _PR.PR00 insert begin
+Method(_DSM, 4)\n
 {\n
     If (!Arg2) { Return (Buffer() { 0x03 } ) }\n
     Return (Package()\n
