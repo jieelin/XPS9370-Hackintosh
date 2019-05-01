@@ -36,6 +36,6 @@
 [No.15] xps 9370 fix PWRB	DSDT/Patch/xps_9370_PWRB.txt
 [No.16] xps 9370 fix SATA	DSDT/Patch/xps_9370_SATA.txt
 [No.17] xps 9370 add SLPB	DSDT/Patch/xps_9370_SLPB.txt
-[No.18] xps 9370 add GPRW	DSDT/Patch/xps_9370_UPRW.txt
+[No.18] xps 9370 add GPRW	DSDT/Patch/xps_9370_GPRW.txt
 [No.19] xps 9370 fix USBX	DSDT/Patch/xps_9379_USBX.txt
 [No.20] xps 9370 add ESEL	DSDT/Patch/xps_9370_Add_ESEL.txt
