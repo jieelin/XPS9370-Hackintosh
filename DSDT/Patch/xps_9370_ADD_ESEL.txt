@@ -1,0 +1,9 @@
+# Add ESEL device by jay
+
+into device name_adr 0x00140000 insert 
+begin
+Method(ESEL)\n
+{\n
+   // do nothing\n
+}\n
+end;
