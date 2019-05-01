@@ -2,28 +2,90 @@
 into method label _DSM parent_adr 0x001F0000 remove_entry;
 into device name_adr 0x001F0000 insert
 begin
-Method (_DSM, 4, NotSerialized)\n
-{\n
-    If (LNot (Arg2))\n
+        OperationRegion (RMP0, PCI_Config, 0x02, 0x02)\n
+        Field (RMP0, AnyAcc, NoLock, Preserve)\n
+        {\n
+            LDID,   16\n
+        }\n
+        Name (LPDL, Package (0x19)\n
+        {\n
+            0x1E49, \n
+            Zero, \n
+            Package (0x04)\n
             {\n
-                Return (Buffer (One)\n
-                {\n
-                     0x03\n                                           
-                })\n
-            }\n
-    Return (Package(0x04)\n
-            {\n
-                "device-id",\n 
+                "device-id", \n
                 Buffer (0x04)\n
                 {\n
-                     0xC1, 0x9C, 0x00, 0x00\n                         
-                },\n 
-                "compatible",\n 
+                     0x42, 0x1E, 0x00, 0x00\n
+                }, \n
+                "compatible", \n
+                Buffer (0x0D)\n
+                {\n
+                    "pci8086,1e42"\n
+                }\n
+            }, \n
+            0x8C46, \n
+            0x8C49, \n
+            0x8C4A, \n
+            0x8C4C, \n
+            0x8C4E, \n
+            0x8C4F, \n
+            0x8C50, \n
+            0x8C52, \n
+            0x8C54, \n
+            0x8C56, \n
+            0x8C5C, \n
+            0x8CC3, \n
+            Zero, \n
+            Package (0x04)\n
+            {\n
+                "device-id", \n
+                Buffer (0x04)\n
+                {\n
+                     0x4B, 0x8C, 0x00, 0x00\n
+                }, \n
+                "compatible", \n
+                Buffer (0x0D)\n
+                {\n
+                    "pci8086,8c4b"\n
+                }\n
+            }, \n
+            0x8CC6, \n
+            0x9D48, \n
+            0x9D58, \n
+            0xA14E, \n
+            0xA150, \n
+            0xA2C5, \n
+            Zero, \n
+            Package (0x04)\n
+            {\n
+                "device-id", \n
+                Buffer (0x04)\n
+                {\n
+                     0xC1, 0x9C, 0x00, 0x00\n
+                }, \n
+                "compatible", \n
                 Buffer (0x0D)\n
                 {\n
                     "pci8086,9cc1"\n
                 }\n
-            })\n
-
-}\n
+            }\n
+        })\n
+        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method\n
+        {\n
+            If (LNot (Arg2))\n
+            {\n
+                Return (Buffer (One)\n
+                {\n
+                     0x03\n
+                })\n
+            }\n
+            Store (Match (LPDL, MEQ, ^LDID, MTR, Zero, Zero), Local0)\n
+            If (LNotEqual (Ones, Local0))\n
+            {\n
+                Store (Match (LPDL, MEQ, Zero, MTR, Zero, Add (Local0, One)), Local0)\n
+                Return (DerefOf (Index (LPDL, Add (Local0, One))))\n
+            }\n
+            Return (Package (0x00){})\n
+        }\n
 end;
