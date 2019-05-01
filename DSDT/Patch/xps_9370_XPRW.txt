@@ -1,0 +1,15 @@
+#GPRW Fix
+into method label GPRW set_label begin XPRW end;
+into Scope label \ insert
+begin
+Method(GPRW, 2)\n
+{\n
+    For (,,)\n
+    {\n
+        If (0x6d == Arg0) { Return (Package() { 0x6d, 0, }) }\n
+        If (0x0d == Arg0) { Return (Package() { 0x0d, 0, }) }\n
+        Break\n
+    }\n
+    Return (XPRW(Arg0, Arg1))\n
+}\n
+end;
