@@ -1,0 +1,7 @@
+#ECDV->EC
+
+#rename ECDV to EC
+into device label ECDV set_label begin EC end;
+into_all all code_regex ECDV replaceall_matched begin EC end;
+into_all all label _SB.PCI0.LPCB.ECDV set_label begin _SB.PCI0.LPCB.EC end;
+into_all all label \_SB.PCI0.LPCB.ECDV set_label begin \_SB.PCI0.LPCB.EC end;
