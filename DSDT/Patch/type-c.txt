@@ -1,0 +1,43 @@
+Hot patch YTBT:
+
+Rename XTBT to YTBT
+
+DefinitionBlock ("", "SSDT", 2, "hack", "YTBT", 0x00000000)
+{
+    Scope (\_GPE)
+    {
+        Method (YTBT, 2, NotSerialized)
+        {
+            If (LEqual (Arg0, Arg1))
+            {
+                Return (Zero)
+            }
+            Else
+            {
+                Return (Zero)
+            }
+        }
+    }
+}
+
+Hot patch TYPEC:
+
+Rename _RMV to XRMV in RP01.PXSX
+
+DefinitionBlock ("", "SSDT", 2, "hack", "TYPC", 0x00000000)
+{
+    External (_SB_.PCI0.RP05.PXSX, DeviceObj)    // (from opcode)
+
+    Scope (_SB.PCI0.RP05.PXSX)
+    {
+        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+        {
+            Return (One)
+        }
+
+        Method (_STA, 0, NotSerialized)  // _STA: Status
+        {
+            Return (0x0F)
+        }
+    }
+}
