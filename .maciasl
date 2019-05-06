@@ -38,6 +38,7 @@
 [No.17] xps 9370 add SLPB	DSDT/Patch/xps_9370_SLPB.txt
 [No.18] xps 9370 add GPRW	DSDT/Patch/xps_9370_GPRW.txt
 [No.19] xps 9370 fix USBX	DSDT/Patch/xps_9379_USBX.txt
+[No.20] xps 9370 fix Type-C	DSDT/Patch/xps_9379_Type-c.txt
 
 [SSDT] xps 9370 fix SSDT-0	DSDT/Patch/xps_9370-SSDT-0.txt
 [SSDT] xps 9370 fix SSDT-1	DSDT/Patch/xps_9370-SSDT-1.txt
