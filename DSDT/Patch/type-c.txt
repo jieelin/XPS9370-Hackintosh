@@ -1,3 +1,23 @@
+# Fix XTBT
+
+into method label XTBT code_regex XTBT\s\(TBSE,\sCPGN\) replaceall_matched begin YTBT (TBSE, CPGN) end;
+
+into scope label _GPE insert
+begin
+Method (YTBT, 2, NotSerialized)\n
+{\n
+    If (LEqual (Arg0, Arg1))\n
+    {\n
+        Return (Zero)\n
+    }\n
+    Else\n
+    {\n
+        Return (Zero)\n
+    }\n
+}\n
+end;
+
+
 Hot patch YTBT:
 
 Rename XTBT to YTBT
