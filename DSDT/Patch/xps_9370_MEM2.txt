@@ -1,4 +1,5 @@
-#iGPU rename TPMX to MEM2 to fit the OS X/macOS expect credit syscl
+#iGPU rename TPMX to MEM2 to fit the OS X/macOS expect
+# Written and maintained by Jay
 
 into device label TPMX remove_entry;
 into device label PCI0 insert
