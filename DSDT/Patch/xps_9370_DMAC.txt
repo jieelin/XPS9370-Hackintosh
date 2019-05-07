@@ -1,4 +1,6 @@
 # Add DMAC device
+# Written and maintained by Jay
+
 into device name_adr 0x001F0000 insert 
 begin
 Device (DMAC)\n
