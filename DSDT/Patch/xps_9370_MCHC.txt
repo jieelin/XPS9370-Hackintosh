@@ -1,4 +1,6 @@
 # Add the missing MCHC device
+# Written and maintained by Jay
+
 into device label MCHC parent_label PCI0 remove_entry;
 into device label PCI0 insert begin
 Device (MCHC)\n
