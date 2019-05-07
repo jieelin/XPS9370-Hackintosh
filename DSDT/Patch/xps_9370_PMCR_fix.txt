@@ -1,4 +1,6 @@
 # Add and fix PMCR device
+# Written and maintained by Jay
+
 into_all all label PPMC set_label begin PMCR end;
 into_all all code_regex Store\s+\(ShiftLeft\s+\(\\_SB.PCI0.PPMC.ACBA,\s+0x08\),\s+PMBV\) replace_matched begin
 Store (ShiftLeft (\\_SB.PCI0.PMCR.ACBA, 0x08), PMBV)
