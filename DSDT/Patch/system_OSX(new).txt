@@ -1,4 +1,6 @@
-#system_OSYS
+# system_OSYS
+# Written and maintained by Jay
+
 into device label PAGD  remove_entry;
 into_all all code_regex _OSI replaceall_matched begin XOSI end;
 into_all all code_regex OSID replaceall_matched begin OSSD end;
