@@ -1,5 +1,5 @@
-#Created by syscl
-#Convert to _DSM method for USBX credit syscl
+# Convert to _DSM method for USBX credit syscl
+# Written and maintained by Jay
 
 into definitionblock code_regex . insert
 begin
