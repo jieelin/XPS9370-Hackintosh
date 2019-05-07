@@ -1,4 +1,6 @@
 # DSDT patch to enable NullEthernet.kext
+# Written and maintained by Jay
+
 
 into device label RMNE remove_entry;
 into definitionblock code_regex . insert
