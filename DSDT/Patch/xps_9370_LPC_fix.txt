@@ -1,4 +1,6 @@
 # LPC fix
+# Written and maintained by Jay
+
 into method label _DSM parent_adr 0x001F0000 remove_entry;
 into device name_adr 0x001F0000 insert
 begin
