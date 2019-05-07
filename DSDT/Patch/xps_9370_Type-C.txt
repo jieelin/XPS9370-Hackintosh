@@ -1,3 +1,6 @@
+# Fix xps 9370 type-c
+# Written and maintained by Jay
+
 # Fix XTBT
 
 into method label XTBT code_regex XTBT\s\(TBSE,\sCPGN\) replaceall_matched begin YTBT (TBSE, CPGN) end;
