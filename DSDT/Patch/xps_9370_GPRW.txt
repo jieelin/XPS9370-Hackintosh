@@ -1,4 +1,6 @@
-#GPRW Fix
+# GPRW Fix
+# Written and maintained by Jay
+
 into method label GPRW set_label begin XPRW end;
 into Scope label \ insert
 begin
