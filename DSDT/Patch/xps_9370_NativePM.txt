@@ -6,6 +6,9 @@
 # Newer KabyLake/KabyLake-R/CoffeeLake boards use _PR.PR00, or _PR.P000 as first CPU path.
 # Adjust this code according to what you find for Processor objects in your own DSDT.
 
+# Written and maintained by Jay
+
+
 into scope label _PR.PR00 insert begin
 Method(_DSM, 4)\n
 {\n
