@@ -1,48 +1,47 @@
-[syn] Rename _DSM methods to XDSM	DSDT/Patch/rename_DSM.txt
-[audio]  Audio Layout 22	DSDT/Patch/audio_HDEF-layout22.txt
-[ethernet]  Add Null Ethernet	DSDT/Patch/Eth_NullEthernet.txt
-[system] System deep idle	DSDT/Patch/system_deep_idle.txt
-[system] OS check fix	DSDT/Patch/system_OSX.txt
-[sys] Fix _WAK Arg0 v2	DSDT/Patch/system_WAK2.txt
-[sys] HPET Fix	DSDT/Patch/system_HPET.txt
-[sys] SMBUS Fix	DSDT/Patch/system_SMBUS.txt
-[sys] IRQ Fix	DSDT/Patch/system_IRQ.txt
-[sys] RTC Fix	DSDT/Patch/system_RTC.txt
-[sys] Fix Mutex with non-zero SyncLevel	DSDT/Patch/system_Mutex.txt
-[igpu] Rename GFX0 to IGPU	DSDT/Patch/graphics_Rename-GFX0.txt
-[sys] Fix _WAK IAOE	DSDT/Patch/system_IAOE.txt
-[igpu] Rename B0D3 to HDAU	DSDT/Patch/graphics_Rename-B0D3.txt
-[syn] Fix ADBG Error	DSDT/Patch/fix_ADBG.txt
-[syn] Fix PARSEOP_ZERO Error	DSDT/Patch/fix_PARSEOP_ZERO.txt
-[usb] USB3 _PRW 0x6D (instant wake)	DSDT/Patch/usb_prw_0x6d_xhc.txt
-[gfx0] Cleanup/Fix Errors (SSDT)	DSDT/Patch/graphics_SSDT-disable-cleanup.txt
-[syn] Remove _PSS placeholders	DSDT/Patch/fix_PSS.txt
-[audio] Rename HADS to HDEF	DSDT/Patch/audio_HDAS_to_HDEF.txt
-[system] OS check fix (new)	DSDT/Patch/system_OSX(new).txt
-[No.01] xps 9370 BrightLight patch	DSDT/Patch/xps_9370_PNLF_BRT6_ALS.txt
-[No.02] xps 9370 Battery patch	DSDT/Patch/xps_9370_Battery_AC.txt
-[No.03] xps 9370 fix DMAC	DSDT/Patch/xps_9370_DMAC.txt
-[No.04] xps 9370 fix EC	DSDT/Patch/xps_9370_ECDV_to_EC.txt
-[No.05] xps 9370 fix EPC	DSDT/Patch/xps_9370_EPC.txt
-[No.06] xps 9370 fix GTF	DSDT/Patch/xps_9370_GTF0.txt
-[No.07] xps 9370 rename HECI to IMEI	DSDT/Patch/xps_9370_HECI_to_IMEI.txt
-[No.08] xps 9370 fix I2C	DSDT/Patch/xps_9370_I2C.txt
-[No.09] xps 9370 fix LPC	DSDT/Patch/xps_9370_LPC_fix.txt
-[No.10] xps 9370 fix MATH	DSDT/Patch/xps_9370_MATH.txt
-[No.11] xps 9370 fix MCHC	DSDT/Patch/xps_9370_MCHC.txt
-[No.12] xps 9370 fix MEM2	DSDT/Patch/xps_9370_MEM2.txt
-[No.13] xps 9370 add Native Power Management	DSDT/Patch/xps_9370_NativePM.txt
-[No.14] xps 9370 fix PMCR	DSDT/Patch/xps_9370_PMCR_fix.txt
-[No.15] xps 9370 fix PWRB	DSDT/Patch/xps_9370_PWRB.txt
-[No.16] xps 9370 fix SATA	DSDT/Patch/xps_9370_SATA.txt
-[No.17] xps 9370 add SLPB	DSDT/Patch/xps_9370_SLPB.txt
-[No.18] xps 9370 add GPRW	DSDT/Patch/xps_9370_GPRW.txt
-[No.19] xps 9370 fix USBX	DSDT/Patch/xps_9370_USBX.txt
-[No.20] xps 9370 fix Type-C	DSDT/Patch/xps_9370_Type-C.txt
-
+[DSDT-No.01][syn] Rename _DSM methods to XDSM	DSDT/Patch/rename_DSM.txt
+[DSDT-No.02][sys] Fix _WAK Arg0 v2	DSDT/Patch/system_WAK2.txt
+[DSDT-No.03][sys] HPET Fix	DSDT/Patch/system_HPET.txt
+[DSDT-No.04][sys] SMBUS Fix	DSDT/Patch/system_SMBUS.txt
+[DSDT-No.05][sys] IRQ Fix	DSDT/Patch/system_IRQ.txt
+[DSDT-No.06][sys] RTC Fix	DSDT/Patch/system_RTC.txt
+[DSDT-No.07][system] OS check fix (new)	DSDT/Patch/system_OSX(new).txt
+[DSDT-No.08][sys] Fix Mutex with non-zero SyncLevel	DSDT/Patch/system_Mutex.txt
+[DSDT-No.09]xps 9370 rename HECI to IMEI	DSDT/Patch/xps_9370_HECI_to_IMEI.txt
+[DSDT-No.10][igpu] Rename GFX0 to IGPU	DSDT/Patch/graphics_Rename-GFX0.txt
+[DSDT-No.11][syn] Fix ADBG Error	DSDT/Patch/fix_ADBG.txt
+[DSDT-No.12][usb] USB3 _PRW 0x6D (instant wake)	DSDT/Patch/usb_prw_0x6d_xhc.txt
+[DSDT-No.13][igpu] Rename B0D3 to HDAU	DSDT/Patch/graphics_Rename-B0D3.txt
+[DSDT-No.14][audio] Rename HADS to HDEF	DSDT/Patch/audio_HDAS_to_HDEF.txt
+[DSDT-No.15][audio]  Audio Layout 22	DSDT/Patch/audio_HDEF-layout22.txt
+[DSDT-No.16][ethernet]  Add Null Ethernet	DSDT/Patch/Eth_NullEthernet.txt
+[DSDT-No.17]xps 9370 BrightLight patch	DSDT/Patch/xps_9370_PNLF_BRT6_ALS.txt
+[DSDT-No.18]xps 9370 fix I2C	DSDT/Patch/xps_9370_I2C.txt
+[DSDT-No.19]xps 9370 fix SATA	DSDT/Patch/xps_9370_SATA.txt
+[DSDT-No.20]xps 9370 Battery patch	DSDT/Patch/xps_9370_Battery_AC.txt
+[DSDT-No.21]xps 9370 fix DMAC	DSDT/Patch/xps_9370_DMAC.txt
+[DSDT-No.22]xps 9370 fix MEM2	DSDT/Patch/xps_9370_MEM2.txt
+[DSDT-No.23]xps 9370 fix EC	DSDT/Patch/xps_9370_ECDV_to_EC.txt
+[DSDT-No.24]xps 9370 fix EPC	DSDT/Patch/xps_9370_EPC.txt
+[DSDT-No.25]xps 9370 fix GTF	DSDT/Patch/xps_9370_GTF0.txt
+[DSDT-No.26]xps 9370 fix LPC	DSDT/Patch/xps_9370_LPC_fix.txt
+[DSDT-No.27]xps 9370 fix MATH	DSDT/Patch/xps_9370_MATH.txt
+[DSDT-No.28]xps 9370 fix MCHC	DSDT/Patch/xps_9370_MCHC.txt
+[DSDT-No.29]xps 9370 add Native Power Management	DSDT/Patch/xps_9370_NativePM.txt
+[DSDT-No.30]xps 9370 fix PMCR	DSDT/Patch/xps_9370_PMCR_fix.txt
+[DSDT-No.31]xps 9370 fix PWRB	DSDT/Patch/xps_9370_PWRB.txt
+[DSDT-No.32]xps 9370 add SLPB	DSDT/Patch/xps_9370_SLPB.txt
+[DSDT-No.33]xps 9370 add GPRW	DSDT/Patch/xps_9370_GPRW.txt
+[DSDT-No.34]xps 9370 fix USBX	DSDT/Patch/xps_9370_USBX.txt
+[DSDT-No.35]xps 9370 fix Type-C	DSDT/Patch/xps_9370_Type-C.txt
+[DSDT-No.36][system] System deep idle	DSDT/Patch/system_deep_idle.txt
 [SSDT] xps 9370 fix SSDT-0	DSDT/Patch/xps_9370-SSDT-0.txt
 [SSDT] xps 9370 fix SSDT-1	DSDT/Patch/xps_9370-SSDT-1.txt
 [SSDT] xps 9370 fix SSDT-4	DSDT/Patch/xps_9370-SSDT-4.txt
 [SSDT] xps 9370 fix SSDT-5	DSDT/Patch/xps_9370-SSDT-5.txt
 [SSDT] xps 9370 fix SSDT-8	DSDT/Patch/xps_9370-SSDT-8.txt
 [SSDT] xps 9370 fix SSDT-9	DSDT/Patch/xps_9370-SSDT-9.txt
+[Other][sys] Fix _WAK IAOE	DSDT/Patch/system_IAOE.txt
+[Other][syn] Fix PARSEOP_ZERO Error	DSDT/Patch/fix_PARSEOP_ZERO.txt
+[Other][system] OS check fix	DSDT/Patch/system_OSX.txt
+[Other][gfx0] Cleanup/Fix Errors (SSDT)	DSDT/Patch/graphics_SSDT-disable-cleanup.txt
+[Other][syn] Remove _PSS placeholders	DSDT/Patch/fix_PSS.txt
