@@ -1,5 +1,5 @@
-#Created by syscl for Dell XPS 13 9350 patches
-#HDAS->HDEF
+# fix xps 9370 SSDT-4
+# Written and maintained by Jay
 
 #rename HDAS to HDEF
 into device label HDAS set_label begin HDEF end;
