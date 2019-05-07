@@ -1,4 +1,4 @@
-# fix xps 9370 SSDT-0
+# fix xps 9370 SSDT-1
 # Written and maintained by Jay
 
 # These patches can be used to clean common errors in SSDTs
