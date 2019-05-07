@@ -1,5 +1,5 @@
-#Maintained by: RehabMan for: Laptop Patches
-#graphics_SSDT-disable-cleanup.txt
+# fix xps 9370 SSDT-0
+# Written and maintained by Jay
 
 # These patches can be used to clean common errors in SSDTs
 # commonly used by laptops with switched dual-GPU setups.
@@ -22,7 +22,6 @@ end;
 # if using refs.txt (recommended), this patch not needed
 into method label _BCM code_regex (\s*)(Arg0)$ replace_matched begin %1//%2 end;
 
-#graphics_Rename-GFX0.txt
 
 # Note: Most DSDT/SSDTs use GFX0 for the integrated graphics device,
 #  but there are few renegades that use VID or AGP1.
