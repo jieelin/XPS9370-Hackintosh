@@ -1,6 +1,5 @@
-#Created by syscl
-#Deep sleep properties
-#Credit: Pike R. Alpha, rewritten by the-darkvoid
+# Deep sleep properties
+# Written and maintained by Jay
 
 into scope label _SB insert
 begin
