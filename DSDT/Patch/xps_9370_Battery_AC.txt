@@ -1,4 +1,6 @@
 # Battery patch
+# Written and maintained by Jay
+
 into device label BAT0  code_regex  Name\s+\(\_UID\,\s+\One?\)  replace_matched begin 
 Name (_UID, Zero)\n
 end;
