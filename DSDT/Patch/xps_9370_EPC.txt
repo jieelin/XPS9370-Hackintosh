@@ -1,4 +1,7 @@
 # EPC Patch
+# Written and maintained by Jay
+
+
 into method label _STA parent_label EPC replace_content begin
 Return (0x0F)
 end;
