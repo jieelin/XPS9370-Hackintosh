@@ -1,4 +1,5 @@
-#ECDV->EC
+# fix xps 9370 SSDT-9
+# Written and maintained by Jay
 
 #rename ECDV to EC
 into device label ECDV set_label begin EC end;
