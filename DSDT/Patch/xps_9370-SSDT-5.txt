@@ -1,5 +1,5 @@
-#Maintained by: RehabMan for: Laptop Patches
-#graphics_SSDT-disable-cleanup.txt
+# fix xps 9370 SSDT-5
+# Written and maintained by Jay
 
 # These patches can be used to clean common errors in SSDTs
 # commonly used by laptops with switched dual-GPU setups.
