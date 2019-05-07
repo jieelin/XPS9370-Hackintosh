@@ -1,5 +1,5 @@
-#Maintained by: syscl/lighting/Yating Zhou for: PCBeta
-#Insert Device (SLPB) for macOS 
+# Insert Device (SLPB) for macOS 
+# Written and maintained by Jay
 
 # Replace all instances of SBTN with SLPB
 into device label SBTN set_label begin SLPB end;
